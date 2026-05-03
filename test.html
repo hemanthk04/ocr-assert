@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Test</title>
+
+  <!-- STOMP client -->
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+<body>
+
+<h3>WebClipboard Test (No SockJS)</h3>
+
+<input id="session" placeholder="sessionId (abc123)" />
+<br><br>
+
+<input id="msg" placeholder="message" />
+<br><br>
+
+<button onclick="connect()">Connect</button>
+<button onclick="send()">Send</button>
+
+<pre id="log"></pre>
+
+<script>
+let client;
+
+function log(m) {
+  document.getElementById("log").innerText += m + "\n";
+}
+
+function connect() {
+  const sessionId = document.getElementById("session").value;
+
+  client = new StompJs.Client({
+    brokerURL: "ws://localhost:8045/ws", // ✅ pure WebSocket
+
+    debug: (str) => console.log(str),
+
+    onConnect: () => {
+      log("Connected");
+
+      client.subscribe("/topic/clipboard/" + sessionId, (msg) => {
+        log("Received: " + msg.body);
+      });
+
+      log("Subscribed to " + sessionId);
+    },
+
+    onStompError: (frame) => {
+      log("Error: " + frame.headers["message"]);
+    }
+  });
+
+  client.activate();
+}
+
+function send() {
+  const sessionId = document.getElementById("session").value;
+  const msg = document.getElementById("msg").value;
+
+  client.publish({
+    destination: "/app/clipboard",
+    body: JSON.stringify({
+      sessionId: sessionId,
+      content: msg,
+      type: "text",
+      deviceId: "browser"
+    })
+  });
+
+  log("Sent: " + msg);
+}
+</script>
+
+</body>
+</html>
