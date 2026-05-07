@@ -23,11 +23,12 @@ When you validate UI text via screenshots + OCR (canvas apps, PDFs, images, char
 
 ## Install
 
-```bash
-npm i ocr-assert
-```
+## Install (before npm publish)
 
----
+Install directly from GitHub:
+
+```bash
+npm i github:hemanthk04/ocr-assert
 
 ## Quickstart
 
