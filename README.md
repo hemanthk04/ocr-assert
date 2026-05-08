@@ -1,5 +1,7 @@
 # ocr-assert
 
+[![CI](https://github.com/hemanthk04/ocr-assert/actions/workflows/ci.yml/badge.svg)](https://github.com/hemanthk04/ocr-assert/actions/workflows/ci.yml)
+
 Tolerant OCR assertions for UI testing.
 
 `ocr-assert` helps reduce flaky OCR-based tests by normalizing common OCR confusions (like `O ↔ 0`, `I/L ↔ 1`, `Z ↔ 2`, `S ↔ 5`) and comparing text using a confusion-aware similarity score.

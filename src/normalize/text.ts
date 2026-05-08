@@ -1,9 +1,8 @@
-// src/normalize/text.ts
-
 /**
  * Confusion map for OCR-like substitutions.
- * NOTE: All characters are uppercase because we normalize input to uppercase.
+ * All characters are uppercase because we normalize input to uppercase.
  */
+
 const CONFUSION_MAP: Record<string, string[]> = {
   "0": ["O"],
   "1": ["I", "L"],

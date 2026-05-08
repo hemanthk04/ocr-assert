@@ -20,7 +20,7 @@ export function assertOCR({
     normExpected
   );
 
-  // 🔥 adaptive threshold
+  // Adaptive threshold
   let adjustedThreshold = threshold;
 
   if (confusionRatio > 0.45 && errorDensity < 0.3) {

@@ -33,19 +33,18 @@ export function similarity(a: string, b: string): SimilarityResult {
   score += bonus;
   }
 
-  // 🔥 Smaller boost (secondary, not primary)
+  //Smaller boost if there are some confusions but not dominant
   if (confusionRatio > 0.85) {
     score += 0.1;
   } else if (confusionRatio > 0.7) {
     score += 0.05;
   }
 
-  // ❌ Penalize dense random errors
+  //If error rates are high, reduce score
   if (errorDensity > 0.25 && confusionRatio < 0.6) {
     score -= 0.15;
   }
 
-  // Clamp
   score = Math.max(0, Math.min(1, score));
 
   return {
