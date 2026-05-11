@@ -2,7 +2,8 @@
 
 [![CI](https://github.com/hemanthk04/ocr-assert/actions/workflows/ci.yml/badge.svg)](https://github.com/hemanthk04/ocr-assert/actions/workflows/ci.yml)
 
-[![npm version](https://img.shields.io/npm/v/your-package-name.svg)](https://www.npmjs.com/package/ocr-assert)
+[![npm version](https://img.shields.io/npm/v/ocr-assert.svg)](https://www.npmjs.com/package/ocr-assert)
+[![npm downloads](https://img.shields.io/npm/dm/ocr-assert.svg)](https://www.npmjs.com/package/ocr-assert)
 
 Tolerant OCR assertions for UI testing.
 
