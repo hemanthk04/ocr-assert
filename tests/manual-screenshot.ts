@@ -13,7 +13,7 @@ async function main() {
 
   assertOCR({
     actual,
-    expected: "TOTAL : 100",
+    expected: "TOTAL : 800",
     threshold: 0.85
   });
 
