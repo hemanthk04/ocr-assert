@@ -4,10 +4,24 @@
   "description": "Tolerant OCR assertions for UI testing",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "vitest",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemanthk04/ocr-assert.git"
+  },
+  "homepage": "https://github.com/hemanthk04/ocr-assert#readme",
+  "bugs": {
+    "url": "https://github.com/hemanthk04/ocr-assert/issues"
   },
   "keywords": [
     "ocr",
@@ -28,4 +42,4 @@
     "typescript": "^5.0.0",
     "vitest": "^1.0.0"
   }
-} 
+}
