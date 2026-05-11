@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/hemanthk04/ocr-assert/actions/workflows/ci.yml/badge.svg)](https://github.com/hemanthk04/ocr-assert/actions/workflows/ci.yml)
 
+[![npm version](https://img.shields.io/npm/v/your-package-name.svg)](https://www.npmjs.com/package/your-package-name)
+
 Tolerant OCR assertions for UI testing.
 
 `ocr-assert` helps reduce flaky OCR-based tests by normalizing common OCR confusions (like `O ↔ 0`, `I/L ↔ 1`, `Z ↔ 2`, `S ↔ 5`) and comparing text using a confusion-aware similarity score.
