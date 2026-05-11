@@ -31,6 +31,8 @@ export function assertOCR({
 
   throw new Error(
     formatError(
+      actual,
+      expected,
       normActual,
       normExpected,
       score,
@@ -42,22 +44,30 @@ export function assertOCR({
 }
 
 function formatError(
-  actual: string,
-  expected: string,
+  rawActual: string,
+  rawExpected: string,
+  normalizedActual: string,
+  normalizedExpected: string,
   score: number,
   confusionRatio: number,
   errorDensity: number,
   threshold: number
 ): string {
-  return `
-OCR Assertion Failed
-
-Expected: ${expected}
-Actual:   ${actual}
-
-Score:            ${score.toFixed(2)}
-Confusion Ratio:  ${confusionRatio.toFixed(2)}
-Error Density:    ${errorDensity.toFixed(2)}
-Threshold Used:   ${threshold.toFixed(2)}
-`;
+  return [
+    "OCR Assertion Failed",
+    "",
+    "Raw Text:",
+    `Expected: ${rawExpected}`,
+    `Actual:   ${rawActual}`,
+    "",
+    "Normalized Text:",
+    `Expected: ${normalizedExpected}`,
+    `Actual:   ${normalizedActual}`,
+    "",
+    "Similarity Breakdown:",
+    `Score:            ${score.toFixed(2)}`,
+    `Threshold Used:   ${threshold.toFixed(2)}`,
+    `Confusion Ratio:  ${confusionRatio.toFixed(2)}`,
+    `Error Density:    ${errorDensity.toFixed(2)}`
+  ].join("\n");
 }
