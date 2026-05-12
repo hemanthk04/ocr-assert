@@ -47,6 +47,10 @@ describe("image preprocessing", () => {
     ).rejects.toThrow("contrast must be greater than 0");
   });
 
+  it("rejects invalid image buffers", async () => {
+    await expect(preprocessImage(Buffer.from("not an image"))).rejects.toThrow();
+  });
+
   it("accepts valid preprocessing options", async () => {
     const result = await preprocessImage(sampleImage, {
       crop: { left: 0, top: 0, width: 10, height: 10 },
