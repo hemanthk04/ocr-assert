@@ -2,11 +2,21 @@ import { normalizeText } from "../normalize/text";
 import { similarity } from "../compare/similarity";
 
 export interface AssertOptions {
+  /** Text returned by an OCR engine or another text extraction step. */
   actual: string;
+  /** Text that should be present after OCR-safe normalization. */
   expected: string;
+  /** Minimum similarity score required to pass. Defaults to 0.85. */
   threshold?: number;
 }
 
+/**
+ * Assert that OCR text is similar enough to an expected string.
+ *
+ * The comparison normalizes common OCR substitutions before computing a
+ * confusion-aware similarity score. Throws an Error with diagnostic details
+ * when the score falls below the configured threshold.
+ */
 export function assertOCR({
   actual,
   expected,

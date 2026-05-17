@@ -1,11 +1,19 @@
 import { areConfusable } from "../normalize/text";
 
 export interface SimilarityResult {
+  /** Overall similarity score from 0 to 1. */
   score: number;
+  /** Ratio of mismatches that look like known OCR confusions. */
   confusionRatio: number;
+  /** Ratio of mismatches to compared text length. */
   errorDensity: number;
 }
 
+/**
+ * Compare two normalized strings with lower penalties for common OCR confusions.
+ *
+ * Returns score and diagnostic metrics used by assertOCR().
+ */
 export function similarity(a: string, b: string): SimilarityResult {
   const maxLen = Math.max(a.length, b.length);
 

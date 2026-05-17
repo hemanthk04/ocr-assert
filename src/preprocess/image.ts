@@ -1,8 +1,11 @@
 import sharp from "sharp";
 
 export interface PreprocessOptions {
+  /** Convert the image to grayscale before OCR. */
   grayscale?: boolean;
+  /** Contrast multiplier. Use 1 for normal contrast. */
   contrast?: number; // 1 = normal
+  /** Crop rectangle applied before other preprocessing operations. */
   crop?: {
     left: number;
     top: number;
@@ -37,6 +40,11 @@ function validatePreprocessOptions(options: PreprocessOptions): void {
   }
 }
 
+/**
+ * Prepare an image for OCR by optionally cropping, grayscaling, and adjusting contrast.
+ *
+ * Accepts a Buffer or filesystem path and returns the processed image as a Buffer.
+ */
 export async function preprocessImage(
   input: Buffer | string,
   options: PreprocessOptions = {}
