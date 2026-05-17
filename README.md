@@ -33,6 +33,7 @@ Install directly from GitHub:
 
 ```bash
 npm i github:hemanthk04/ocr-assert
+```
 
 ## Quickstart
 
@@ -67,31 +68,42 @@ assertOCR({
 });
 ```
 
+### 3) One-step screenshot OCR assertion
+
+```ts
+import { assertScreenshotOCR } from "ocr-assert";
+
+const actual = await assertScreenshotOCR({
+  image: "./screenshot.png",
+  expected: "PAYMENT SUCCESSFUL",
+});
+
+console.log(actual);
+```
+
 ---
 
 ## Playwright example
 
 ```ts
 import { test, expect } from "@playwright/test";
-import { preprocessImage, extractText, assertOCR } from "ocr-assert";
+import { assertScreenshotOCR } from "ocr-assert";
 
 test("canvas receipt shows success", async ({ page }) => {
   await page.goto("https://example.com");
 
   const shot = await page.screenshot();
 
-  const processed = await preprocessImage(shot, {
-    grayscale: true,
-    contrast: 1.2,
+  const actual = await assertScreenshotOCR({
+    image: shot,
+    expected: "SUCCESS",
+    preprocess: {
+      crop: { left: 100, top: 200, width: 500, height: 120 },
+    },
   });
 
-  const actual = await extractText(processed);
-
-  // Throws on failure (works well with expect().toThrow if you want)
-  assertOCR({ actual, expected: "SUCCESS" });
-
   // Optional: still keep an explicit expect so test runners show an assertion step
-  expect(true).toBeTruthy();
+  expect(actual).toContain("SUCCESS");
 });
 ```
 
@@ -117,6 +129,25 @@ function assertOCR(options: AssertOptions): void;
 - Computes a confusion-aware similarity score.
 - Uses an adaptive threshold in some cases (high confusion ratio with acceptable error density).
 - Throws an error on failure with diagnostic metrics.
+
+---
+
+### `assertScreenshotOCR(options)`
+
+```ts
+type AssertScreenshotOCROptions = {
+  image: Buffer | string;
+  expected: string;
+  threshold?: number; // default: 0.85
+  preprocess?: PreprocessOptions | false; // default: { grayscale: true, contrast: 1.2 }
+};
+
+function assertScreenshotOCR(
+  options: AssertScreenshotOCROptions
+): Promise<string>;
+```
+
+Preprocesses a screenshot/image, extracts text, runs `assertOCR()`, and returns the raw extracted text for debugging. Pass `preprocess: false` to OCR the original image directly.
 
 ---
 
