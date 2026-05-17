@@ -22,12 +22,10 @@ function normalizeChar(c: string): string {
 }
 
 /**
- * Normalize full text:
- * - Unicode normalization
- * - Uppercase conversion
- * - Remove noise characters
- * - Apply OCR normalization (normalizeChar)
- * - Normalize spaces
+ * Normalize text into an OCR-safe comparison form.
+ *
+ * Applies Unicode normalization, uppercasing, noise removal, common OCR
+ * character canonicalization, and whitespace normalization.
  */
 export function normalizeText(input: string): string {
   return input
@@ -42,7 +40,7 @@ export function normalizeText(input: string): string {
 }
 
 /**
- * Check if two characters are considered equivalent under OCR confusion.
+ * Check if two single-character strings are equivalent under known OCR confusions.
  */
 export function areConfusable(a: string, b: string): boolean {
   if (a === b) return true;

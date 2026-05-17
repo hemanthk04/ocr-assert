@@ -109,6 +109,23 @@ test("canvas receipt shows success", async ({ page }) => {
 
 ## API
 
+All public functions and TypeScript types are exported from the package root.
+
+```ts
+import {
+  assertOCR,
+  assertScreenshotOCR,
+  extractText,
+  normalizeText,
+  preprocessImage,
+  similarity,
+  type AssertOptions,
+  type AssertScreenshotOCROptions,
+  type PreprocessOptions,
+  type SimilarityResult,
+} from "ocr-assert";
+```
+
 ### `assertOCR(options)`
 
 ```ts
@@ -125,6 +142,7 @@ function assertOCR(options: AssertOptions): void;
 - Computes a confusion-aware similarity score.
 - Uses an adaptive threshold in some cases (high confusion ratio with acceptable error density).
 - Throws an error on failure with diagnostic metrics.
+- Exported type: `AssertOptions`.
 
 ---
 
@@ -144,6 +162,8 @@ function assertScreenshotOCR(
 ```
 
 Preprocesses a screenshot/image, extracts text, runs `assertOCR()`, and returns the raw extracted text for debugging. Pass `preprocess: false` to OCR the original image directly.
+
+- Exported type: `AssertScreenshotOCROptions`.
 
 ---
 
@@ -174,6 +194,8 @@ function preprocessImage(
 
 Uses `sharp` to optionally crop, grayscale, and adjust contrast.
 
+- Exported type: `PreprocessOptions`.
+
 ---
 
 ### `normalizeText(input)`
@@ -199,6 +221,8 @@ function similarity(a: string, b: string): SimilarityResult;
 ```
 
 Computes a weighted edit-distance where confusable substitutions are penalized less than random substitutions.
+
+- Exported type: `SimilarityResult`.
 
 ---
 
