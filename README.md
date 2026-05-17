@@ -6,7 +6,7 @@
 
 Tolerant OCR assertions for UI testing.
 
-`ocr-assert` helps reduce flaky OCR-based tests by normalizing common OCR confusions (like `O ↔ 0`, `I/L ↔ 1`, `Z ↔ 2`, `S ↔ 5`) and comparing text using a confusion-aware similarity score.
+`ocr-assert` helps reduce flaky OCR-based tests by normalizing common OCR confusions (like `O <-> 0`, `I/L <-> 1`, `Z <-> 2`, `S <-> 5`) and comparing text using a confusion-aware similarity score.
 
 > Status: early version (v0.1.0). API may evolve.
 
@@ -27,17 +27,13 @@ When you validate UI text via screenshots + OCR (canvas apps, PDFs, images, char
 
 ## Install
 
-## Install (before npm publish)
-
-Install directly from GitHub:
-
 ```bash
-npm i github:hemanthk04/ocr-assert
+npm install ocr-assert
 ```
 
 ## Quickstart
 
-### 1) Assert two strings (already OCR’d)
+### 1) Assert two strings (already OCR'd)
 
 ```ts
 import { assertOCR } from "ocr-assert";
